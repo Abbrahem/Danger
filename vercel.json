@@ -33,61 +33,38 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/auth/(.*)",
-      "dest": "/api/auth.js"
+      "source": "/api/auth/(.*)",
+      "destination": "/api/auth.js"
     },
     {
-      "src": "/api/products/(.*)",
-      "dest": "/api/products.js"
+      "source": "/api/products/(.*)",
+      "destination": "/api/products.js"
     },
     {
-      "src": "/api/products",
-      "dest": "/api/products.js"
+      "source": "/api/products",
+      "destination": "/api/products.js"
     },
     {
-      "src": "/api/orders/(.*)",
-      "dest": "/api/orders.js"
+      "source": "/api/orders/(.*)",
+      "destination": "/api/orders.js"
     },
     {
-      "src": "/api/orders",
-      "dest": "/api/orders.js"
+      "source": "/api/orders",
+      "destination": "/api/orders.js"
     },
     {
-      "src": "/api/images/(.*)",
-      "dest": "/api/images.js"
+      "source": "/api/images/(.*)",
+      "destination": "/api/images.js"
     },
     {
-      "src": "/api/upload",
-      "dest": "/api/upload.js"
+      "source": "/api/upload",
+      "destination": "/api/upload.js"
     },
     {
-      "src": "/api/seed",
-      "dest": "/api/seed.js"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json",
-      "headers": {
-        "Content-Type": "application/json"
-      }
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/api/seed",
+      "destination": "/api/seed.js"
     }
   ],
   "headers": [
