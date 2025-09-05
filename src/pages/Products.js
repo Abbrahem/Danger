@@ -23,7 +23,7 @@ const Products = () => {
 
   useEffect(() => {
     filterProducts();
-  }, [products, selectedBrand, searchTerm]);
+  }, [products, selectedBrand, searchTerm]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchProducts = async () => {
     try {
