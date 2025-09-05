@@ -1,27 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "framework": "create-react-app",
-  "functions": {
-    "api/auth.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/products.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/orders.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/images.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/upload.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/seed.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/auth/login",
