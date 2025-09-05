@@ -1,117 +1,71 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app",
+  "functions": {
+    "api/auth.js": {
+      "runtime": "nodejs18.x"
     },
-    {
-      "src": "api/auth.js",
-      "use": "@vercel/node"
+    "api/products.js": {
+      "runtime": "nodejs18.x"
     },
-    {
-      "src": "api/products.js",
-      "use": "@vercel/node"
+    "api/orders.js": {
+      "runtime": "nodejs18.x"
     },
-    {
-      "src": "api/orders.js",
-      "use": "@vercel/node"
+    "api/images.js": {
+      "runtime": "nodejs18.x"
     },
-    {
-      "src": "api/images.js",
-      "use": "@vercel/node"
+    "api/upload.js": {
+      "runtime": "nodejs18.x"
     },
-    {
-      "src": "api/upload.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/seed.js",
-      "use": "@vercel/node"
+    "api/seed.js": {
+      "runtime": "nodejs18.x"
     }
-  ],
+  },
   "rewrites": [
     {
       "source": "/api/auth/login",
-      "destination": "/api/auth.js"
+      "destination": "/api/auth"
     },
     {
-      "source": "/api/auth/logout",
-      "destination": "/api/auth.js"
+      "source": "/api/auth/logout", 
+      "destination": "/api/auth"
     },
     {
       "source": "/api/auth/check",
-      "destination": "/api/auth.js"
+      "destination": "/api/auth"
     },
     {
-      "source": "/api/products/:id/soldout",
-      "destination": "/api/products.js"
+      "source": "/api/products/(.*)/soldout",
+      "destination": "/api/products"
     },
     {
-      "source": "/api/products/:id",
-      "destination": "/api/products.js"
+      "source": "/api/products/(.*)",
+      "destination": "/api/products"
     },
     {
       "source": "/api/products",
-      "destination": "/api/products.js"
+      "destination": "/api/products"
     },
     {
-      "source": "/api/orders/:id",
-      "destination": "/api/orders.js"
+      "source": "/api/orders/(.*)",
+      "destination": "/api/orders"
     },
     {
       "source": "/api/orders",
-      "destination": "/api/orders.js"
+      "destination": "/api/orders"
     },
     {
-      "source": "/api/images/:id",
-      "destination": "/api/images.js"
+      "source": "/api/images/(.*)",
+      "destination": "/api/images"
     },
     {
       "source": "/api/upload",
-      "destination": "/api/upload.js"
+      "destination": "/api/upload"
     },
     {
       "source": "/api/seed",
-      "destination": "/api/seed.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/manifest.json",
-      "destination": "/manifest.json",
-      "permanent": false
+      "destination": "/api/seed"
     }
   ]
 }
