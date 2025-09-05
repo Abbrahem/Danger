@@ -8,8 +8,14 @@ module.exports = async function handler(req, res) {
   
   // Parse URL to determine action
   const urlParts = req.url.split('/');
-  const productId = urlParts[urlParts.length - 1].split('?')[0];
+  let productId = urlParts[urlParts.length - 1].split('?')[0];
   const isSoldOutEndpoint = req.url.includes('/soldout');
+  
+  // Extract product ID from soldout endpoint
+  if (isSoldOutEndpoint) {
+    productId = urlParts[urlParts.length - 2];
+  }
+  
   const isProductIdEndpoint = productId && productId !== 'products' && !req.url.endsWith('/products');
 
   try {
