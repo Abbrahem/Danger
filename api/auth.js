@@ -41,7 +41,11 @@ module.exports = async function handler(req, res) {
       // Seed admin if no users exist
       await seedAdmin();
 
-      const user = await db.collection('users').findOne({ email });
+      // Check both users and admins collections
+      let user = await db.collection('users').findOne({ email });
+      if (!user) {
+        user = await db.collection('admins').findOne({ email });
+      }
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
@@ -52,7 +56,7 @@ module.exports = async function handler(req, res) {
       }
 
       const token = jwt.sign(
-        { userId: user._id, email: user.email, role: user.role },
+        { userId: user._id, email: user.email, role: user.role || 'admin' },
         process.env.JWT_SECRET,
         { expiresIn: '7d' }
       );

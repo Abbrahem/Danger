@@ -1,5 +1,5 @@
+const bcrypt = require('bcryptjs');
 const clientPromise = require('./mongodb');
-const { hashPassword } = require('./auth');
 
 const seedAdmin = async () => {
   try {
@@ -10,11 +10,12 @@ const seedAdmin = async () => {
     const existingAdmin = await db.collection('admins').findOne({});
     
     if (!existingAdmin) {
-      const hashedPassword = await hashPassword(process.env.ADMIN_PASSWORD || 'admin123');
+      const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 10);
       
       await db.collection('admins').insertOne({
         email: process.env.ADMIN_EMAIL || 'admin@danger.com',
         password: hashedPassword,
+        role: 'admin',
         createdAt: new Date()
       });
       
