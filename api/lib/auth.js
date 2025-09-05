@@ -25,16 +25,13 @@ const authenticateToken = (req, res, next) => {
       return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
 
-    // Simple session check instead of JWT
-    if (token.startsWith('admin-session-')) {
-      req.user = { userId: token.replace('admin-session-', '') };
-      return next();
-    } else {
-      return res.status(403).json({ message: 'Invalid token.' });
-    }
+    // Verify JWT token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    return next();
   } catch (error) {
     console.error('Auth error:', error);
-    return res.status(500).json({ message: 'Authentication error' });
+    return res.status(403).json({ message: 'Invalid or expired token' });
   }
 };
 
